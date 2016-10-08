@@ -28,8 +28,10 @@ def getTrip():
 
 @app.route('/map', methods=['POST'])
 def get_map():
+	print("Fetching map images")
 	data = request.form["Body"] if "Body" in request.form else '{ "lat": 41.37, "lng": 2.08 }'
 	data = json.loads(data)
+	
 	lat = data["lat"]
 	lng = data["lng"]
 	return smsmap.respond(lat, lng)
