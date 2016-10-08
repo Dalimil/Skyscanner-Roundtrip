@@ -1,4 +1,4 @@
-# Skyscanner-Roundtrip
+# Skyscanner Roundtrip
 App that lets you find multi-day multi-stop low-cost roundtrips around Europe - other continents are comming soon.
 
 ## Motivation
