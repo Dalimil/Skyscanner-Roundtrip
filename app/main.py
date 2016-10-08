@@ -17,6 +17,8 @@ def index():
 
 @app.route('/trip', methods=['POST'])
 def getTrip():
+	print(request.form)
+
 	params = request.form["params"] if "params" in request.form else json.dumps(form_sample)
 	params = json.loads(params)
 

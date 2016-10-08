@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.class
-*.png
+map-*.png
 # C extensions
 *.so
 
