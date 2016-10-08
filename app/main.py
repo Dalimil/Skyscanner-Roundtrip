@@ -13,7 +13,7 @@ form_sample = {
 
 @app.route('/')
 def index():
-	return "<code>POST /trip <br> - with parameter 'params'=jsonData<br> where jsonData = {}<br> where budget is not used at the moment</code>".format(json.dumps(form_sample, indent=4))
+	return "<code>GET /map?lat=41.37&lng=2.08<br>- and now wait for the SMS<br><br>POST /trip <br> - with parameter 'params'=jsonData<br> where jsonData = {}</code>".format(json.dumps(form_sample, indent=4))
 
 @app.route('/trip', methods=['POST'])
 def getTrip():
@@ -26,16 +26,14 @@ def getTrip():
 	journey = flights.find_flights(cities, year_month)
 	return json.dumps(journey)
 
+@app.route('/map')
+def get_map():
+	lat = request.args.get('lat') if 'lat' in request.args else 41.37
+	lng = request.args.get('lng') if 'lng' in request.args else 2.08
+	smsmap.get_map(lat, lng)
+	return "OK"
+
 @app.route('/debug')
 def debug():
-	find_flights(['BUD', 'ROME', 'VENI', 'BCN'], "2016-11")
-	return "ok"
-
-@app.route('/imgs')
-def get_imgs():
-	return "<img src='" + "'><img src='".join([ i["img"] for i in json.loads(open("cities.json").read())["cities"] ]) + ">"
-
-@app.route('/map')
-def map_route():
-	smsmap.get_map("", "")
+	flights.find_flights(['BUD', 'ROME', 'VENI', 'BCN'], "2016-11")
 	return "ok"
