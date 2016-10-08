@@ -88,6 +88,6 @@ def respond(lat, lng):
 	print("SMS length: ", len(body))
 	resp = twilio.twiml.Response()
 	resp.message(body)
-	return body
-	# return str(resp)
+	# return body
+	return str(resp)
 	
