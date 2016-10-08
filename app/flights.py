@@ -36,8 +36,9 @@ def find_flights(cities, year_month):
 				could_go.append({ "from": a, "to": b, "price": flights[2]["price"], "time": flights[1]["time"] })
 
 		could_go = sorted(could_go, key=lambda x: x["price"])
-		print(could_go)
+		print("Could go: ", could_go)
 		next_go = could_go[0]
+		next_go["link"] = get_ref_url(next_go["from"], next_go["to"], next_go["time"])
 		journey.append(next_go)
 		c_date = qdtToTs(next_go["time"])
 		a = next_go["to"]
@@ -47,6 +48,7 @@ def find_flights(cities, year_month):
 	final_tripA = ({ "from": a, "to": cities[0], "price": flights[0]["price"], "time": flights[0]["time"] })
 	final_tripB = ({ "from": a, "to": cities[0], "price": flights[1]["price"], "time": flights[1]["time"] })
 	final_trip = final_tripA if final_tripA["price"] < final_tripB["price"] else final_tripB
+	final_trip["link"] = get_ref_url(final_trip["from"], final_trip["to"], final_trip["time"])
 	journey.append(final_trip)
 
 	print("Final journey: ", journey)
