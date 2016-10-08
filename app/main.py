@@ -16,7 +16,7 @@ jsonSample = {
 
 @app.route('/')
 def index():
-	return "<code> POST /trip <br> - with parameter 'params'=jsonData<br>jsonData = {}</code>".format(json.dumps(jsonSample, indent=4))
+	return "<code> GET /map - to see sample usage <br><br>POST /trip <br> - with parameter 'params'=jsonData<br>jsonData = {}</code>".format(json.dumps(jsonSample, indent=4))
 
 
 @app.route('/trip', methods=['POST'])
