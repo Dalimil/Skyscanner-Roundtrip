@@ -36,14 +36,43 @@ def getTrip():
 @app.route('/debug')
 def debug():
 	#find_flights_ab("", "")
+	return "ok"
+
+@app.route('/map')
+def map_route():
 	get_map("", "")
 	return "ok"
-	
+
 def select_from_list(name):
 	if (name == "Europe"):
 		return ["Paris", "London"]
 	print("invalid list-name")
 	return []
+
+def qdtToTs(qdt):
+	k = datetime.datetime.strptime(s, "%Y-%m-%dT%H:%M:%S")
+	return int((k-datetime.datetime(1970,1,1)).total_seconds())
+
+def find_flights(cities, c_date):
+	journey = []
+	seen = []
+	for a in cities:
+		could_go = []
+		for b in cities:
+			if a == b:
+				continue
+			if b in seen:
+				continue
+
+			flights = [ i for i in find_flights_ab(a, b) if qdtToTs(i["QuoteDateTime"]) > c_date + 24*3600*2 ]
+			if (len(flights) > 0):
+				could_go.append({ "to": b, "price": flights[i]["MinPrice"] })
+
+		could_go = sorted(could_go, lambda x: x["price"])
+		print(could_go)
+		next_go = could_go[0]
+		journey.append(next_go)
+
 
 
 def find_flights_ab(a, b):
@@ -54,6 +83,7 @@ def find_flights_ab(a, b):
 	url = "http://partners.api.skyscanner.net/apiservices/browsegrid/v1.0/GB/GBP/en-GB/{}/{}/{}-{}?apiKey={}".format(a, b, year, month, API_KEY)
 	r = requests.get(url, headers={"Accept": "application/json"})
 	print(r.text)
+	return r.json["Dates"][1]
 
 def get_map(lat, lng):
 	lat = "40.71"
