@@ -37,8 +37,12 @@ def getTrip():
 
 @app.route('/debug')
 def debug():
-	find_flights(["LON", "BCN", "PRG", "AMS"], 1476182787)
+	# find_flights(["LON", "BCN", "PRG", "AMS"], 1476182787)
 	return "ok"
+
+@app.route('/imgs')
+def get_imgs():
+	return "<img src='" + "'><img src='".join([ i["img"] for i in json.loads(open("cities.json").read())["cities"] ]) + ">"
 
 @app.route('/map')
 def map_route():
@@ -52,7 +56,7 @@ def select_from_list(name):
 	return []
 
 def qdtToTs(qdt):
-	print(qdt)
+	# print(qdt)
 	k = datetime.datetime.strptime(qdt, "%Y-%m-%d")
 	return int((k-datetime.datetime(1970,1,1)).total_seconds())
 
@@ -74,6 +78,7 @@ def find_flights(cities, c_date):
 			if (len(flights) > 1):
 				could_go.append({ "from": a, "to": b, "price": flights[0]["price"], "time": flights[0]["time"] })
 				could_go.append({ "from": a, "to": b, "price": flights[1]["price"], "time": flights[1]["time"] })
+				could_go.append({ "from": a, "to": b, "price": flights[2]["price"], "time": flights[1]["time"] })
 
 		could_go = sorted(could_go, key=lambda x: x["price"])
 		print(could_go)
