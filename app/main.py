@@ -13,7 +13,7 @@ form_sample = {
 
 @app.route('/')
 def index():
-	return "<code>GET /map?lat=41.37&lng=2.08<br>- and now wait for the SMS<br><br>POST /trip <br> - with parameter 'params'=jsonData<br> where jsonData = {}</code>".format(json.dumps(form_sample, indent=4))
+	return "<code>SMS to +441922214447 -> POST /map with lat=41.37&lng=2.08<br>- and now wait for the reply SMS<br><br>POST /trip <br> - with parameter 'params'=jsonData<br> where jsonData = {}</code>".format(json.dumps(form_sample, indent=4))
 
 @app.route('/trip', methods=['POST'])
 def getTrip():
@@ -26,12 +26,15 @@ def getTrip():
 	journey = flights.find_flights(cities, year_month)
 	return json.dumps(journey)
 
-@app.route('/map')
+@app.route('/map', methods=['POST'])
 def get_map():
-	lat = request.args.get('lat') if 'lat' in request.args else 41.37
-	lng = request.args.get('lng') if 'lng' in request.args else 2.08
-	smsmap.get_map(lat, lng)
-	return "OK"
+	print("Fetching map images")
+	data = request.form["Body"] if "Body" in request.form else '{ "lat": 41.37, "lng": 2.08 }'
+	data = json.loads(data)
+	
+	lat = data["lat"]
+	lng = data["lng"]
+	return smsmap.respond(lat, lng)
 
 @app.route('/debug')
 def debug():

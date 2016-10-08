@@ -1,3 +1,5 @@
 flask
 requests
 flask-socketio
+scikit-image
+twilio
