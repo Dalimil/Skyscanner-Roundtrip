@@ -4,14 +4,15 @@ from app import app
 import json
 import requests
 import smsmap
+import datetime
 
 API_KEY = "ca462265583925016847853845313477"
 
 jsonSample = {
 	'from_list': False, # or True + cities=Europe
 	'cities': ['London', 'Paris', 'Barcelona'], # or Europe
-	'date_from': 1475912855,
-	'date_to': 1475998855,
+	'date_from': 1476182787,
+	'date_to': 1477737987,
 	'price': 400 # or none
 }
 
@@ -36,7 +37,7 @@ def getTrip():
 
 @app.route('/debug')
 def debug():
-	find_flights_ab("", "")
+	find_flights(["LON", "BCN", "PRG", "AMS"], 1476182787)
 	return "ok"
 
 @app.route('/map')
@@ -51,13 +52,17 @@ def select_from_list(name):
 	return []
 
 def qdtToTs(qdt):
-	k = datetime.datetime.strptime(s, "%Y-%m-%dT%H:%M:%S")
+	print(qdt)
+	k = datetime.datetime.strptime(qdt, "%Y-%m-%d")
 	return int((k-datetime.datetime(1970,1,1)).total_seconds())
 
 def find_flights(cities, c_date):
 	journey = []
-	seen = []
-	for a in cities:
+
+	a = cities[0]
+	seen = [a]
+	while(len(seen) != len(cities)):
+		print(a, c_date, journey)
 		could_go = []
 		for b in cities:
 			if a == b:
@@ -65,25 +70,37 @@ def find_flights(cities, c_date):
 			if b in seen:
 				continue
 
-			flights = [ i for i in find_flights_ab(a, b) if qdtToTs(i["QuoteDateTime"]) > c_date + 24*3600*2 ]
-			if (len(flights) > 0):
-				could_go.append({ "to": b, "price": flights[i]["MinPrice"] })
+			flights = [ i for i in find_flights_ab(a, b) if qdtToTs(i["time"]) > c_date + 24*3600*2 ]
+			if (len(flights) > 1):
+				could_go.append({ "from": a, "to": b, "price": flights[0]["price"], "time": flights[0]["time"] })
+				could_go.append({ "from": a, "to": b, "price": flights[1]["price"], "time": flights[1]["time"] })
 
-		could_go = sorted(could_go, lambda x: x["price"])
+		could_go = sorted(could_go, key=lambda x: x["price"])
 		print(could_go)
 		next_go = could_go[0]
 		journey.append(next_go)
+		c_date = qdtToTs(next_go["time"])
+		a = next_go["to"]
+		seen.append(a)
+
+	flights = [ i for i in find_flights_ab(a, cities[0]) if qdtToTs(i["time"]) > c_date + 24*3600*2 ]
+	final_tripA = ({ "from": a, "to": cities[0], "price": flights[0]["price"], "time": flights[0]["time"] })
+	final_tripB = ({ "from": a, "to": cities[0], "price": flights[1]["price"], "time": flights[1]["time"] })
+	final_trip = final_tripA if final_tripA["price"] < final_tripB["price"] else final_tripB
+	journey.append(final_trip)
+
+	print(journey)
+	return journey
 
 
 
 def find_flights_ab(a, b):
-	a = "LON"
-	b = "JFK"
 	year = "2016"
-	month = "11"
+	month = "10"
 	url = "http://partners.api.skyscanner.net/apiservices/browsegrid/v1.0/GB/GBP/en-GB/{}/{}/{}-{}?apiKey={}".format(a, b, year, month, API_KEY)
 	r = requests.get(url, headers={"Accept": "application/json"})
-	print(r.text)
-	return r.json["Dates"][1]
+	# print(r.text)
+	data = r.json()["Dates"]
+	return [ { "time": data[0][i]["DateString"], "price": data[1][i]["MinPrice"] } for i in range(len(data[0])) if data[1][i] != None ]
 
 
