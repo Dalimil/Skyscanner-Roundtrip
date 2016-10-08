@@ -62,3 +62,6 @@ def find_flights_ab(a, b, year_month):
 	return [ { "time": data[0][i]["DateString"], "price": data[1][i]["MinPrice"] } for i in range(len(data[0])) if data[1][i] != None ]
 
 
+def get_ref_url(a, b, year_month_date):
+	url = "http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/{}/{}/{}?apiKey={}".format(a, b, year_month_date, API_KEY)
+	return url
