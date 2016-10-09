@@ -2,8 +2,11 @@
 
 Mobile app that lets you find multi-day multi-stop low-cost roundtrips around Europe, US or any other continent. Simply pick the cities that you want to visit, your available date, and our Android app will plan the best round-trip with the cheapest flight combinations.
 
-<img src="https://github.com/Dalimil/Skyscanner-Roundtrip/raw/master/docs/screenshots/Screenshot_2016-10-09-08-10-18.png" width="100">
-<img src="https://github.com/Dalimil/Skyscanner-Roundtrip/raw/master/docs/screenshots/Screenshot_2016-10-09-08-11-41.png" width="100">
+<img src="https://github.com/Dalimil/Skyscanner-Roundtrip/raw/master/docs/screenshots/Screenshot_2016-10-09-08-10-18.png" width="150">
+<img src="https://github.com/Dalimil/Skyscanner-Roundtrip/raw/master/docs/screenshots/Screenshot_2016-10-09-08-11-41.png" width="150">
+<img src="https://github.com/Dalimil/Skyscanner-Roundtrip/raw/master/docs/screenshots/Screenshot_2016-10-09-08-10-32.png" width="150">
+<img src="https://github.com/Dalimil/Skyscanner-Roundtrip/raw/master/docs/screenshots/Screenshot_2016-10-09-08-52-06.png" width="150">
+<img src="https://github.com/Dalimil/Skyscanner-Roundtrip/raw/master/docs/screenshots/Screenshot_2016-10-09-08-52-20.png" width="150">
 
 ## Motivation
 
