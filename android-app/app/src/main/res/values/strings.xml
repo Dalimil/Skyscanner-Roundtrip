@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Skyscanner RoundTrip</string>
-    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_splash">Skyscanner RoundTrip</string>
     <string name="title_activity_price_list">Route</string>
     <string name="title_activity_partner_price">Price List</string>
-    <string name="title_activity_lost">LostActivity</string>
+    <string name="title_activity_lost">Lost?</string>
 </resources>

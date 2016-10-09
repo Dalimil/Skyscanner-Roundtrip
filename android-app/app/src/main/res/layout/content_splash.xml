@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/logo"
         android:layout_centerHorizontal="true"
-        android:textSize="20sp"
+        android:textSize="30sp"
+        android:textColor="#BBFFFFFF"
         android:text="@string/app_name"/>
 
     <ImageView
@@ -33,11 +34,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:gravity="center_vertical"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="Powered By"/>
 
         <ImageView

@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
+import hackupc.skytrips.helper.Helper;
+
 /**
  * Created by whdinata on 10/9/16.
  */
@@ -28,13 +30,17 @@ public class SmsListener extends BroadcastReceiver {
                 try{
                     Object[] pdus = (Object[]) bundle.get("pdus");
                     msgs = new SmsMessage[pdus.length];
+                    String msg = "";
                     for(int i=0; i<msgs.length; i++){
                         msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
                         msg_from = msgs[i].getOriginatingAddress();
                         String msgBody = msgs[i].getMessageBody();
 
+                        msg += msgBody;
                         System.out.println("Message: " + msgBody);
                     }
+
+                    Helper.activity.setImage(msg);
                 }catch(Exception e){
 //                            Log.d("Exception caught",e.getMessage());
                 }

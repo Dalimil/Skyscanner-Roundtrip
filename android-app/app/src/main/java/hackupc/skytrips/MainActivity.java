@@ -3,6 +3,7 @@ package hackupc.skytrips;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -30,6 +34,7 @@ import hackupc.skytrips.callbacks.OnPlaceListReturned;
 import hackupc.skytrips.connection.API;
 import hackupc.skytrips.connection.Param;
 import hackupc.skytrips.models.Place;
+import hackupc.skytrips.ui.LostActivity;
 import hackupc.skytrips.ui.view.CompoundTextView;
 
 public class MainActivity extends AppCompatActivity implements OnPlaceListReturned, CompoundTextView.OnRemoveButtonClicked{
@@ -124,6 +129,21 @@ public class MainActivity extends AppCompatActivity implements OnPlaceListReturn
                 API.requestRoute(MainActivity.this, cities, calendar.getText().toString(), etBudget.getText().toString());
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent = new Intent(this, LostActivity.class);
+        startActivity(intent);
+
+        return true;
     }
 
     @Override

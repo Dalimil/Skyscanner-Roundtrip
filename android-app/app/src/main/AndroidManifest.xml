@@ -17,6 +17,7 @@
         <activity
             android:name=".ui.SplashActivity"
             android:label="@string/title_activity_splash"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,14 +28,17 @@
         <activity
             android:name=".ui.PriceListActivity"
             android:label="@string/title_activity_price_list"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.PartnerPriceActivity"
             android:label="@string/title_activity_partner_price"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.LostActivity"
             android:label="@string/title_activity_lost"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <receiver android:name=".callbacks.SmsListener"

@@ -11,81 +11,89 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/primary">
 
-    <LinearLayout
-        android:id="@+id/outer"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/search"
-        android:orientation="vertical"
-        tools:context="hackupc.skytrips.MainActivity">
-
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/search">
         <LinearLayout
+            android:id="@+id/outer"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="hackupc.skytrips.MainActivity">
 
-            <TextView
-                android:id="@+id/calendar"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:layout_marginRight="1dp"
-                android:drawableLeft="@drawable/ic_calendar"
-                android:text="2016-10"
-                android:padding="10dp"
-                android:background="@android:color/white"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/budget"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:inputType="number"
-                android:padding="10dp"
-                android:hint="£££"
-                android:background="@android:color/white"/>
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/bg_list_item">
+                <TextView
+                    android:id="@+id/calendar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginRight="1dp"
+                    android:drawableLeft="@drawable/ic_calendar"
+                    android:text="2016-10"
+                    android:padding="10dp"
+                    android:background="@android:color/white"/>
 
-            <AutoCompleteTextView
-                android:id="@+id/source"
+                <EditText
+                    android:id="@+id/budget"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:textSize="14sp"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:hint="£££"
+                    android:background="@android:color/white"/>
+            </LinearLayout>
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Departing From"
+                android:padding="10dp"
+                android:background="@drawable/bg_list_item">
+
+                <AutoCompleteTextView
+                    android:id="@+id/source"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:hint="Departing From"
+                    android:background="@android:color/white"/>
+            </RelativeLayout>
+
+            <hackupc.skytrips.ui.view.CompoundTextView
+                android:id="@+id/chosen_source"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="10dp"
+                android:background="@color/primary_light"
+                android:visibility="gone"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/destination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:hint="Flying To"
                 android:background="@android:color/white"/>
-        </RelativeLayout>
 
-        <hackupc.skytrips.ui.view.CompoundTextView
-            android:id="@+id/chosen_source"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:padding="10dp"
-            android:background="@color/primary_light"
-            android:visibility="gone"/>
-
-        <AutoCompleteTextView
-            android:id="@+id/destination"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:padding="10dp"
-            android:hint="Flying To"
-            android:background="@android:color/white"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-    </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@id/search"
