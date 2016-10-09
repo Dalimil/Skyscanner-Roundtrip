@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CompoundTextView">
+        <attr name="drawable_width" format="dimension" />
+        <attr name="drawable_height" format="dimension" />
+        <attr name="android:drawablePadding" />
+        <attr name="drawable_city" format="integer" />
+        <attr name="drawable_remove" format="integer" />
+        <attr name="text_city" format="integer"/>
+        <attr name="text_country" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CheapestFlightView">
+        <attr name="title" format="string" />
+        <attr name="date" format="string" />
+        <attr name="price" format="string" />
+    </declare-styleable>
+</resources>
