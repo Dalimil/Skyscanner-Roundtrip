@@ -13,7 +13,7 @@ form_sample = {
 
 @app.route('/')
 def index():
-	return "<code>SMS to +441922214447 -> POST /map with lat=41.37&lng=2.08<br>- and now wait for the reply SMS<br><br>POST /trip <br> - with parameter 'params'=jsonData<br> where jsonData = {}</code>".format(json.dumps(form_sample, indent=4))
+	return '<code>SMS to +441922214447 with body { "lat": 41.37, "lng": 2.08 }<br>- and now wait for the reply SMS<br><br>POST /trip <br> - with parameter "params"=jsonData<br> where jsonData = ' + json.dumps(form_sample, indent=4) + '</code>'
 
 @app.route('/trip', methods=['POST'])
 def getTrip():
